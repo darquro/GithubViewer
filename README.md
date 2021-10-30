@@ -1,2 +1,2 @@
-# github_viewer
+# GitHubViewer
 SwiftUI Sample App
