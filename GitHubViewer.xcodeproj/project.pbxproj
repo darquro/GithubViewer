@@ -14,6 +14,10 @@
 		5F12269D272D2ADC002BDA38 /* GitHubRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F12269C272D2ADC002BDA38 /* GitHubRepository.swift */; };
 		5F1226A0272D2AF6002BDA38 /* GitHubRepositoryOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F12269F272D2AF6002BDA38 /* GitHubRepositoryOwner.swift */; };
 		5F1226AD272D3550002BDA38 /* GitHubViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226AC272D3550002BDA38 /* GitHubViewerTests.swift */; };
+		5F1226B5272E88BE002BDA38 /* SearchTextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226B4272E88BE002BDA38 /* SearchTextFieldModifier.swift */; };
+		5F1226B7272E8ADA002BDA38 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226B6272E8ADA002BDA38 /* SearchViewModel.swift */; };
+		5F1226B9272E961F002BDA38 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226B8272E961F002BDA38 /* SearchUseCase.swift */; };
+		5F1226BB272EA57B002BDA38 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226BA272EA57B002BDA38 /* UIApplication+Extensions.swift */; };
 		5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5827255DEA00BA5DE8 /* Main.swift */; };
 		5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5927255DEA00BA5DE8 /* RootView.swift */; };
 		5F22DC8527255DED00BA5DE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */; };
@@ -22,7 +26,6 @@
 		5F22DC9F2725753400BA5DE8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC9E2725753400BA5DE8 /* HomeView.swift */; };
 		5F22DCA22725776D00BA5DE8 /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DCA12725776D00BA5DE8 /* BigCardView.swift */; };
 		5F22DCA527257DAE00BA5DE8 /* CardViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DCA427257DAE00BA5DE8 /* CardViewEntity.swift */; };
-		5F22DCAD27257FC800BA5DE8 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DCAC27257FC800BA5DE8 /* Array+Extensions.swift */; };
 		5F4358862727095A00B37B17 /* GitHubSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4358852727095A00B37B17 /* GitHubSearchRepository.swift */; };
 		5F43588927270B4F00B37B17 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F43588827270B4F00B37B17 /* HomeUseCase.swift */; };
 		5F43588C272859CD00B37B17 /* View+ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F43588B272859CD00B37B17 /* View+ViewDidLoadModifier.swift */; };
@@ -54,6 +57,10 @@
 		5F1226AA272D3550002BDA38 /* GitHubViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitHubViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F1226AC272D3550002BDA38 /* GitHubViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubViewerTests.swift; sourceTree = "<group>"; };
 		5F1226AE272D3550002BDA38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F1226B4272E88BE002BDA38 /* SearchTextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchTextFieldModifier.swift; path = ../../../../SearchTextFieldModifier.swift; sourceTree = "<group>"; };
+		5F1226B6272E8ADA002BDA38 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		5F1226B8272E961F002BDA38 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
+		5F1226BA272EA57B002BDA38 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		5F22DC5827255DEA00BA5DE8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		5F22DC5927255DEA00BA5DE8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,7 +71,6 @@
 		5F22DC9E2725753400BA5DE8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5F22DCA12725776D00BA5DE8 /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		5F22DCA427257DAE00BA5DE8 /* CardViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewEntity.swift; sourceTree = "<group>"; };
-		5F22DCAC27257FC800BA5DE8 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		5F4358852727095A00B37B17 /* GitHubSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchRepository.swift; sourceTree = "<group>"; };
 		5F43588827270B4F00B37B17 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		5F43588B272859CD00B37B17 /* View+ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ViewDidLoadModifier.swift"; sourceTree = "<group>"; };
@@ -195,8 +201,8 @@
 		5F22DCAB27257FB800BA5DE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				5F22DCAC27257FC800BA5DE8 /* Array+Extensions.swift */,
 				5F43588B272859CD00B37B17 /* View+ViewDidLoadModifier.swift */,
+				5F1226BA272EA57B002BDA38 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -238,6 +244,7 @@
 				5F4358942728699C00B37B17 /* RefreshControl.swift */,
 				5F122693272D1CF3002BDA38 /* SafariView.swift */,
 				5F122696272D202C002BDA38 /* WebView.swift */,
+				5F1226B4272E88BE002BDA38 /* SearchTextFieldModifier.swift */,
 			);
 			path = _CommonComponents;
 			sourceTree = "<group>";
@@ -246,6 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				5F22DC9B272574EC00BA5DE8 /* SearchView.swift */,
+				5F1226B6272E8ADA002BDA38 /* SearchViewModel.swift */,
+				5F1226B8272E961F002BDA38 /* SearchUseCase.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -374,11 +383,12 @@
 				5F22DC9C272574EC00BA5DE8 /* SearchView.swift in Sources */,
 				5F7CB4522726E96A0015AA5A /* ViewModelObject.swift in Sources */,
 				5F4358952728699C00B37B17 /* RefreshControl.swift in Sources */,
-				5F22DCAD27257FC800BA5DE8 /* Array+Extensions.swift in Sources */,
+				5F1226BB272EA57B002BDA38 /* UIApplication+Extensions.swift in Sources */,
 				5F12269A272D2AB1002BDA38 /* GitHubSearchResponse.swift in Sources */,
 				5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */,
 				5F22DC9827255FF300BA5DE8 /* SmallCardView.swift in Sources */,
 				5F22DC9F2725753400BA5DE8 /* HomeView.swift in Sources */,
+				5F1226B5272E88BE002BDA38 /* SearchTextFieldModifier.swift in Sources */,
 				5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */,
 				5F22DCA22725776D00BA5DE8 /* BigCardView.swift in Sources */,
 				5F122694272D1CF3002BDA38 /* SafariView.swift in Sources */,
@@ -387,7 +397,9 @@
 				5F43588C272859CD00B37B17 /* View+ViewDidLoadModifier.swift in Sources */,
 				5F122697272D202C002BDA38 /* WebView.swift in Sources */,
 				5F7CB44F2726E7F20015AA5A /* HomeViewModel.swift in Sources */,
+				5F1226B7272E8ADA002BDA38 /* SearchViewModel.swift in Sources */,
 				5F7CB4452726BEFB0015AA5A /* GitHubAPIRequest.swift in Sources */,
+				5F1226B9272E961F002BDA38 /* SearchUseCase.swift in Sources */,
 				5F22DCA527257DAE00BA5DE8 /* CardViewEntity.swift in Sources */,
 				5F7CB4422726B7F20015AA5A /* APIClient.swift in Sources */,
 				5F1226A0272D2AF6002BDA38 /* GitHubRepositoryOwner.swift in Sources */,

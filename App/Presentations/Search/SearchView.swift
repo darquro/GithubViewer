@@ -6,52 +6,76 @@
 //
 
 import SwiftUI
+import Combine
 
-struct SearchView: View {
+struct SearchView<ViewModel: SearchViewModelProtocol>: View {
 
-    @State var keyword: String = ""
-    @State var isEditing: Bool = false
+    @ObservedObject var viewModel: ViewModel
+    @State var isKeywordEditing: Bool = false
+
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Input Keyword", text: $keyword)
-                    .padding(7)
-                    .padding(.horizontal, 25)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .padding(.horizontal, 10)
-                    .onTapGesture {
-                        self.isEditing = true
-                    }
-                    .overlay(
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 16)
-
-                            if isEditing {
-                                Button(action: {
-                                    self.keyword = ""
-                                }) {
-                                    Image(systemName: "multiply.circle.fill")
-                                        .foregroundColor(.gray)
-                                        .padding(.trailing, 8)
-                                }
+                TextField("Keyword",
+                          text: $viewModel.binding.keyword,
+                          onEditingChanged: { changed in
+                            isKeywordEditing = changed
+                          },
+                          onCommit: {
+                            viewModel.input.onCommit.send()
+                          })
+                    .modifier(SearchTextFieldModifier(keyword: $viewModel.binding.keyword, isEditing: $isKeywordEditing))
+                ScrollView {
+                    LazyVStack {
+                        ForEach(viewModel.output.items.indices, id: \.self) { index in
+                            let item = viewModel.output.items[index]
+                            NavigationLink(
+                                destination: WebView(url: item.url).navigationBarTitle(item.title),
+                                isActive: $viewModel.output.items[index].isNavigationPushing
+                                ) {
+                                SmallCardView(item: $viewModel.output.items[index])
                             }
                         }
-                    )
-                Spacer()
-                Text("SearchView")
+                    }
+                }
             }
             .navigationBarTitle("Search")
+            .navigationBarHidden(isKeywordEditing)
+            .onTapGesture {
+                isKeywordEditing = false
+                UIApplication.shared.endEditing()
+            }
         }
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
+
+    @StateObject static var viewModel: ViewModelMock = .init()
+
     static var previews: some View {
-        SearchView()
+        SearchView(viewModel: viewModel)
+    }
+
+    final class ViewModelMock: SearchViewModelProtocol {
+        final class Input: SearchViewModelInput {
+            var onCommit: PassthroughSubject<Void, Never> = .init()
+        }
+
+        final class Binding: SearchViewModelBinding {
+            @State var keyword: String = ""
+        }
+
+        final class Output: SearchViewModelOutput {
+            var items: [CardViewEntity] = []
+        }
+
+        let input: Input = .init()
+        var binding: Binding = .init()
+        var output: Output = .init()
     }
 }

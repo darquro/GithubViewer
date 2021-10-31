@@ -11,7 +11,6 @@ import Combine
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
     @ObservedObject var viewModel: ViewModel
-    @State private var isShowing = false
 
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
@@ -20,22 +19,19 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     var body: some View {
         NavigationView {
             VStack {
-                if viewModel.output.isProgressViewShowing {
+                if viewModel.output.state == .initialzed {
+                    Spacer()
+                } else if viewModel.output.state == .dataLoading {
                     ProgressView("loading...")
-                } else {
+                } else if viewModel.output.state == .dataFeched {
                     ScrollView {
-//                        RefreshControl(coordinateSpaceName: RefreshControl.coordinateSpaceDefaultName, onRefresh: {
-//                            viewModel.input.onLoad.send()
-//                        })
                         LazyVStack {
                             ForEach(viewModel.output.items.indices, id: \.self) { index in
                                 let item = viewModel.output.items[index]
                                 NavigationLink(destination:
                                                 WebView(url: item.url)
                                                 .navigationBarTitle(item.title, displayMode: .inline),
-                                               isActive: $viewModel.output.items[index].isNavigationPushing
-
-                                ) {
+                                               isActive: $viewModel.output.items[index].isNavigationPushing) {
                                     BigCardView(item: $viewModel.output.items[index])
                                         .onTapGesture(perform: {
                                             viewModel.input.onTappedCardView.send(index)
@@ -45,7 +41,8 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                         }
                         .padding([.leading, .trailing], 8)
                     }
-//                    .coordinateSpace(name: RefreshControl.coordinateSpaceDefaultName)
+                } else {
+                    Text("An error has occurred. Please try again.")                        
                 }
             }
             .navigationBarTitle("Home")
@@ -67,13 +64,13 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HomeView(viewModel: viewModel.state(.initialzed))
-                .previewDisplayName(ViewModelMock.State.initialzed.rawValue)
+                .previewDisplayName(HomeViewModel.State.initialzed.rawValue)
             HomeView(viewModel: viewModel.state(.dataLoading))
-                .previewDisplayName(ViewModelMock.State.dataLoading.rawValue)
+                .previewDisplayName(HomeViewModel.State.dataLoading.rawValue)
             HomeView(viewModel: viewModel.state(.dataFeched))
-                .previewDisplayName(ViewModelMock.State.dataFeched.rawValue)
+                .previewDisplayName(HomeViewModel.State.dataFeched.rawValue)
             HomeView(viewModel: viewModel.state(.error))
-                .previewDisplayName(ViewModelMock.State.error.rawValue)
+                .previewDisplayName(HomeViewModel.State.error.rawValue)
         }
     }
 
@@ -88,22 +85,19 @@ struct HomeView_Previews: PreviewProvider {
         }
         final class Binding: HomeViewModelBinding {}
         final class Output: HomeViewModelOutput {
+            var state: HomeViewModel.State = .initialzed
             var items: [CardViewEntity] = []
-            var isProgressViewShowing: Bool = false
             var isAlertShowing: Bool = false
-            var isNavigationPushing: [Bool] = []
+
         }
 
-        enum State: String {
-            case initialzed, dataLoading, dataFeched, error
-        }
-
-        func state(_ state: State) -> Self {
+        func state(_ state: HomeViewModel.State) -> Self {
+            output.state = state
             switch state {
             case .initialzed:
                 break
             case .dataLoading:
-                output.isProgressViewShowing = true
+                break
             case .dataFeched:
                 let entity = CardViewEntity(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
                                             title: "swift",
@@ -114,7 +108,6 @@ struct HomeView_Previews: PreviewProvider {
                                             url: .init(string: "https://github.com/apple/swift")!)
 
                 output.items = [CardViewEntity](repeating: entity, count: 3)
-                output.isProgressViewShowing = false
             case .error:
                 output.isAlertShowing = true
                 break

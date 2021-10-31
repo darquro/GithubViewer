@@ -12,7 +12,7 @@ struct GitHubRepository: Decodable {
     let name: String
     let fullName: String
     let owner: GitHubRepositoryOwner
-    let htmlUrl: String
+    let htmlUrl: URL
     let description: String?
     let language: String?
     let stargazersCount: Int

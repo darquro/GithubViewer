@@ -6,78 +6,64 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct SmallCardView: View {
 
-    struct CardData: Identifiable {
-        let id: UUID = .init()
-        let image: UIImage
-        let title: String
-        let language: String?
-        let star: Int
-        let description: String?
-        let url: URL
-    }
-
-    let cardData: CardData
-
-    init(_ cardData: CardData) {
-        self.cardData = cardData
-    }
+    @Binding var item: CardViewEntity
 
     var body: some View {
         VStack(alignment: .leading) {
-            Image(uiImage: cardData.image)
-                .renderingMode(.original)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 60, height: 60)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color.gray, lineWidth: 2))
-                .shadow(color: .gray, radius: 1, x: 0, y: 0)
-
-            Text(cardData.title)
-                .foregroundColor(.black)
-                .font(.title)
-                .fontWeight(.bold)
-
             HStack {
-                Text(cardData.language ?? "")
+                Text(item.title)
+                    .foregroundColor(.black)
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Spacer()
+                LazyImage(source: item.imageURL, resizingMode: .aspectFill)
+                    .frame(width: 30, height: 30)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                    .shadow(color: .gray, radius: 1, x: 0, y: 0)
+            }
+            Text(item.description ?? "")
+                .foregroundColor(.black)
+                .lineLimit(nil)
+            HStack {
+                Text(item.language ?? "")
                     .foregroundColor(.gray)
                     .font(.footnote)
-                Spacer()
                 HStack(spacing: 4) {
                     Image(systemName: "star.fill")
                         .renderingMode(.template)
                         .foregroundColor(.yellow)
-                    Text(String(cardData.star))
+                    Text(String(item.star))
                         .foregroundColor(.gray)
                         .font(.footnote)
                 }
             }
-
-            Text(cardData.description ?? "")
-                .foregroundColor(.black)
-                .lineLimit(nil)
         }
-        .padding(24)
+        .padding(16)
         .overlay(
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.gray, lineWidth: 1)
         )
-        .frame(minWidth: 240, maxWidth: 240, minHeight: 180)
         .padding(8)
     }
 }
 
 struct SmallCardView_Previews: PreviewProvider {
+
+    @State static var item: CardViewEntity = .init(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
+                                                   title: "swift",
+                                                   subTitle: "apple",
+                                                   language: "Swift",
+                                                   star: 1000,
+                                                   description: "The Swift Programming Language",
+                                                   url: .init(string: "https://github.com/apple/swift")!)
+
     static var previews: some View {
-        SmallCardView(.init(image: .init(named: "GitHub")!,
-                       title: "Title",
-                       language: "Swift",
-                       star: 1000,
-                       description: "Description Text,Description Text,Description Text,Description Text,",
-                       url: .init(string: "https://example.com")!))
-            .previewLayout(.sizeThatFits)
+        SmallCardView(item: $item)
+            .previewLayout(.fixed(width: 400, height: 240))
     }
 }

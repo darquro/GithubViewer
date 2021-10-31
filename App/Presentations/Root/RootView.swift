@@ -10,6 +10,7 @@ import SwiftUI
 struct RootView: View {
 
     @StateObject var homeViewModel: HomeViewModel = .init()
+    @StateObject var searchViewModel: SearchViewModel = .init()
 
     var body: some View {
         TabView {
@@ -18,7 +19,7 @@ struct RootView: View {
                     Image(systemName: "house")
                     Text("Home")
                 }
-            SearchView()
+            SearchView(viewModel: searchViewModel)
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")

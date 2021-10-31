@@ -16,10 +16,6 @@ struct BigCardView: View {
         VStack(alignment: .leading) {
             HStack {
                 LazyImage(source: item.imageURL, resizingMode: .aspectFill)
-//                Image(uiImage: item.image)
-//                    .renderingMode(.original)
-//                    .resizable()
-//                    .aspectRatio(contentMode: .fit)
                     .frame(width: 60, height: 60)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.gray, lineWidth: 2))

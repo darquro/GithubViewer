@@ -22,15 +22,15 @@ struct GitHubSearchAPIRequest: GitHubAPIRequest {
 
         var params: [String] = []
 
-        if let language = language {
+        if let language = language, !language.isEmpty {
             params.append("language:\(language)")
         }
 
-        if let hasStars = hasStars {
+        if let hasStars = hasStars, hasStars > 0 {
             params.append("stars:>=\(hasStars)")
         }
 
-        if let topic = topic {
+        if let topic = topic, !topic.isEmpty {
             params.append("topic:\(topic)")
         }
 
