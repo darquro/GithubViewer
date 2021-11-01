@@ -22,7 +22,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                 if viewModel.output.state == .initialzed {
                     Spacer()
                 } else if viewModel.output.state == .dataLoading {
-                    ProgressView("loading...")
+                    DataLoadingView()
                 } else if viewModel.output.state == .dataFeched {
                     ScrollView {
                         LazyVStack {
@@ -42,7 +42,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                         .padding([.leading, .trailing], 8)
                     }
                 } else {
-                    Text("An error has occurred. Please try again.")                        
+                    ErrorView()
                 }
             }
             .navigationBarTitle("Home")
@@ -64,13 +64,13 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             HomeView(viewModel: viewModel.state(.initialzed))
-                .previewDisplayName(HomeViewModel.State.initialzed.rawValue)
+                .previewDisplayName(HomeViewModelState.initialzed.rawValue)
             HomeView(viewModel: viewModel.state(.dataLoading))
-                .previewDisplayName(HomeViewModel.State.dataLoading.rawValue)
+                .previewDisplayName(HomeViewModelState.dataLoading.rawValue)
             HomeView(viewModel: viewModel.state(.dataFeched))
-                .previewDisplayName(HomeViewModel.State.dataFeched.rawValue)
+                .previewDisplayName(HomeViewModelState.dataFeched.rawValue)
             HomeView(viewModel: viewModel.state(.error))
-                .previewDisplayName(HomeViewModel.State.error.rawValue)
+                .previewDisplayName(HomeViewModelState.error.rawValue)
         }
     }
 
@@ -85,13 +85,13 @@ struct HomeView_Previews: PreviewProvider {
         }
         final class Binding: HomeViewModelBinding {}
         final class Output: HomeViewModelOutput {
-            var state: HomeViewModel.State = .initialzed
+            var state: HomeViewModelState = .initialzed
             var items: [CardViewEntity] = []
             var isAlertShowing: Bool = false
 
         }
 
-        func state(_ state: HomeViewModel.State) -> Self {
+        func state(_ state: HomeViewModelState) -> Self {
             output.state = state
             switch state {
             case .initialzed:

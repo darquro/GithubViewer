@@ -22,9 +22,13 @@ protocol HomeViewModelBinding: BindingObject {
 }
 
 protocol HomeViewModelOutput: OutputObject {
-    var state: HomeViewModel.State { get }
+    var state: HomeViewModelState { get }
     var items: [CardViewEntity] { get set }
     var isAlertShowing: Bool { get set }
+}
+
+enum HomeViewModelState: String {
+    case initialzed, dataLoading, dataFeched, error
 }
 
 final class HomeViewModel: HomeViewModelProtocol {
@@ -37,13 +41,9 @@ final class HomeViewModel: HomeViewModelProtocol {
     final class Binding: HomeViewModelBinding {}
 
     final class Output: HomeViewModelOutput {
-        var state: HomeViewModel.State = .initialzed
+        var state: HomeViewModelState = .initialzed
         @Published var items: [CardViewEntity] = []
         @Published var isAlertShowing: Bool = false
-    }
-
-    enum State: String {
-        case initialzed, dataLoading, dataFeched, error
     }
 
     let input: Input
@@ -65,19 +65,19 @@ final class HomeViewModel: HomeViewModelProtocol {
             .handleEvents(receiveOutput: {  [weak self] value in
                 self?.output.state = .dataLoading
             })
-            .delay(for: .seconds(1), scheduler: DispatchQueue.global(), options: .none) // for test
             .flatMap { _ in self.useCase.fetch() }
+            .print("onLoad")
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
                 case .finished:
-                    self?.output.state = .dataFeched
-                case .failure(let error):
-                    print(error)
+                    break
+                case .failure(_):
                     self?.output.isAlertShowing = true
                     self?.output.state = .error
                 }
             }, receiveValue: { [weak self] value in
                 self?.output.items = value
+                self?.output.state = .dataFeched
 
             })
             .store(in: &cancellables)

@@ -22,7 +22,13 @@ protocol SearchViewModelBinding: BindingObject {
 }
 
 protocol SearchViewModelOutput: OutputObject {
+    var state: SearchViewModelState { get }
     var items: [CardViewEntity] { get set }
+    var isAlertShowing: Bool { get set }
+}
+
+enum SearchViewModelState: String {
+    case initialzed, dataLoading, dataFeched, error
 }
 
 final class SearchViewModel: SearchViewModelProtocol {
@@ -36,7 +42,9 @@ final class SearchViewModel: SearchViewModelProtocol {
     }
 
     final class Output: SearchViewModelOutput {
+        var state: SearchViewModelState = .initialzed
         @Published var items: [CardViewEntity] = []
+        @Published var isAlertShowing: Bool = false
     }
 
     let input: Input
@@ -55,12 +63,22 @@ final class SearchViewModel: SearchViewModelProtocol {
         self.usecase = usecase
 
         input.onCommit
+            .handleEvents(receiveOutput: {  [weak self] value in
+                self?.output.state = .dataLoading
+            })
             .flatMap { _ in self.usecase.fetch(keyword: binding.keyword) }
             .print("onCommit")
-            .sink(receiveCompletion: { completion in
-
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(_):
+                    self?.output.isAlertShowing = true
+                    self?.output.state = .error
+                }
             }, receiveValue: { [weak self] value in
                 self?.output.items = value
+                self?.output.state = .dataFeched
             })
             .store(in: &cancellables)
     }
