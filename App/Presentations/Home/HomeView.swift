@@ -21,7 +21,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         NavigationView {
             VStack {
                 if viewModel.output.state == .initialzed {
-                    Spacer()
+                    DataLoadingView()
                 } else if viewModel.output.state == .dataLoading {
                     DataLoadingView()
                 } else if viewModel.output.state == .dataFeched {
