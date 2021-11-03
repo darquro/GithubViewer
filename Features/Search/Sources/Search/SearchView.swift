@@ -9,16 +9,16 @@ import SwiftUI
 import Combine
 import ViewComponents
 
-struct SearchView<ViewModel: SearchViewModelProtocol>: View {
+public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
 
     @ObservedObject var viewModel: ViewModel
     @State var isKeywordEditing: Bool = false
 
-    init(viewModel: ViewModel) {
+    public init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
 
-    var body: some View {
+    public var body: some View {
         NavigationView {
             VStack {
                 SearchTextField(keyword: $viewModel.binding.keyword,

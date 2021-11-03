@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Home
+import Search
 
 struct RootView: View {
 

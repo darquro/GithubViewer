@@ -10,15 +10,17 @@ import Combine
 import Repositories
 import ViewComponents
 
-protocol HomeUseCaseProtocol {
+public protocol HomeUseCaseProtocol {
     func fetch() -> AnyPublisher<[CardViewEntity], Error>
 }
 
-final class HomeUseCase: HomeUseCaseProtocol {
+public final class HomeUseCase: HomeUseCaseProtocol {
 
     private let searchRepository: GitHubSearchRepositoryProtocol = GitHubSearchRepository()
 
-    func fetch() -> AnyPublisher<[CardViewEntity], Error> {
+    public init () {}
+
+    public func fetch() -> AnyPublisher<[CardViewEntity], Error> {
         searchRepository.fetchSwiftTopicRepos()
             .map { response in
                 response.items.map {

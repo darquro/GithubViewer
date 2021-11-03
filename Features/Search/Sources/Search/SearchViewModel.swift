@@ -9,55 +9,61 @@ import Foundation
 import Combine
 import ViewComponents
 
-protocol SearchViewModelProtocol: ViewModelObject where Input: SearchViewModelInput,
+public protocol SearchViewModelProtocol: ViewModelObject where Input: SearchViewModelInput,
                                                         Binding: SearchViewModelBinding,
                                                         Output: SearchViewModelOutput {
 }
 
-protocol SearchViewModelInput: InputObject {
+public protocol SearchViewModelInput: InputObject {
     var onCommit: PassthroughSubject<Void, Never> { get }
 }
 
-protocol SearchViewModelBinding: BindingObject {
+public protocol SearchViewModelBinding: BindingObject {
     var keyword: String { get set }
 }
 
-protocol SearchViewModelOutput: OutputObject {
+public protocol SearchViewModelOutput: OutputObject {
     var state: SearchViewModelState { get }
     var items: [CardViewEntity] { get set }
     var isAlertShowing: Bool { get set }
 }
 
-enum SearchViewModelState: String {
+public enum SearchViewModelState: String {
     case initialzed, dataLoading, dataFeched, error
 }
 
-final class SearchViewModel: SearchViewModelProtocol {
+public final class SearchViewModel: SearchViewModelProtocol {
 
-    final class Input: SearchViewModelInput {
-        var onCommit: PassthroughSubject<Void, Never> = .init()
+    final public class Input: SearchViewModelInput {
+        public var onCommit: PassthroughSubject<Void, Never> = .init()
+
+        public init () {}
     }
 
-    final class Binding: SearchViewModelBinding {
-        @Published var keyword: String = ""
+    final public class Binding: SearchViewModelBinding {
+        @Published public var keyword: String = ""
+
+        public init () {}
     }
 
-    final class Output: SearchViewModelOutput {
-        var state: SearchViewModelState = .initialzed
-        @Published var items: [CardViewEntity] = []
-        @Published var isAlertShowing: Bool = false
+    final public class Output: SearchViewModelOutput {
+        public var state: SearchViewModelState = .initialzed
+        @Published public var items: [CardViewEntity] = []
+        @Published public var isAlertShowing: Bool = false
+
+        public init () {}
     }
 
-    let input: Input
-    var binding: Binding
-    var output: Output
+    public let input: Input
+    public var binding: Binding
+    public var output: Output
     private let usecase: SearchUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
 
-    init(input: Input = Input(),
-         binding: Binding = Binding(),
-         output: Output = Output(),
-         usecase: SearchUseCaseProtocol = SearchUseCase()) {
+    public init(input: Input = Input(),
+                binding: Binding = Binding(),
+                output: Output = Output(),
+                usecase: SearchUseCaseProtocol = SearchUseCase()) {
         self.input = input
         self.binding = binding
         self.output = output

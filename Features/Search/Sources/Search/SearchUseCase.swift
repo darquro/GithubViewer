@@ -10,15 +10,17 @@ import Combine
 import Repositories
 import ViewComponents
 
-protocol SearchUseCaseProtocol {
+public protocol SearchUseCaseProtocol {
     func fetch(keyword: String) -> AnyPublisher<[CardViewEntity], Error>
 }
 
-final class SearchUseCase: SearchUseCaseProtocol {
+public final class SearchUseCase: SearchUseCaseProtocol {
 
     private let searchRepository: GitHubSearchRepositoryProtocol = GitHubSearchRepository()
 
-    func fetch(keyword: String) -> AnyPublisher<[CardViewEntity], Error> {
+    public init () {}
+
+    public func fetch(keyword: String) -> AnyPublisher<[CardViewEntity], Error> {
         searchRepository.fetch(keyword: keyword)
             .map {
                 $0.items.map { item in

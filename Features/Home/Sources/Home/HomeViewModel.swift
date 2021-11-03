@@ -9,54 +9,60 @@ import Foundation
 import Combine
 import ViewComponents
 
-protocol HomeViewModelProtocol: ViewModelObject where Input: HomeViewModelInput,
+public protocol HomeViewModelProtocol: ViewModelObject where Input: HomeViewModelInput,
                                                       Binding: HomeViewModelBinding,
                                                       Output: HomeViewModelOutput {
 }
 
-protocol HomeViewModelInput: InputObject {
+public protocol HomeViewModelInput: InputObject {
     var onLoad: PassthroughSubject<Void, Error> { get }
     var onTappedCardView: PassthroughSubject<Int, Never> { get }
 }
 
-protocol HomeViewModelBinding: BindingObject {
+public protocol HomeViewModelBinding: BindingObject {
 }
 
-protocol HomeViewModelOutput: OutputObject {
+public protocol HomeViewModelOutput: OutputObject {
     var state: HomeViewModelState { get }
     var items: [CardViewEntity] { get set }
     var isAlertShowing: Bool { get set }
 }
 
-enum HomeViewModelState: String {
+public enum HomeViewModelState: String {
     case initialzed, dataLoading, dataFeched, error
 }
 
-final class HomeViewModel: HomeViewModelProtocol {
+public final class HomeViewModel: HomeViewModelProtocol {
 
-    final class Input: HomeViewModelInput {
-        var onLoad = PassthroughSubject<Void, Error>()
-        var onTappedCardView = PassthroughSubject<Int, Never>()
+    final public class Input: HomeViewModelInput {
+        public var onLoad = PassthroughSubject<Void, Error>()
+        public var onTappedCardView = PassthroughSubject<Int, Never>()
+
+        public init () {}
     }
 
-    final class Binding: HomeViewModelBinding {}
-
-    final class Output: HomeViewModelOutput {
-        var state: HomeViewModelState = .initialzed
-        @Published var items: [CardViewEntity] = []
-        @Published var isAlertShowing: Bool = false
+    final public class Binding: HomeViewModelBinding {
+        public init () {}
     }
 
-    let input: Input
-    var binding: Binding
-    var output: Output
+    final public class Output: HomeViewModelOutput {
+        public var state: HomeViewModelState = .initialzed
+        @Published public var items: [CardViewEntity] = []
+        @Published public var isAlertShowing: Bool = false
+
+        public init () {}
+    }
+
+    public let input: Input
+    public var binding: Binding
+    public var output: Output
     private let useCase: HomeUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
 
-    init(input: Input = Input(),
-         binding: Binding = Binding(),
-         output: Output = Output(),
-         useCase: HomeUseCaseProtocol = HomeUseCase()) {
+    public init(input: Input = Input(),
+                binding: Binding = Binding(),
+                output: Output = Output(),
+                useCase: HomeUseCaseProtocol = HomeUseCase()) {
         self.input = input
         self.binding = binding
         self.output = output

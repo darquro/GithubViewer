@@ -9,15 +9,15 @@ import SwiftUI
 import Combine
 import ViewComponents
 
-struct HomeView<ViewModel: HomeViewModelProtocol>: View {
+public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
     @ObservedObject var viewModel: ViewModel
 
-    init(viewModel: ViewModel) {
+    public init(viewModel: ViewModel) {
         self.viewModel = viewModel
     }
 
-    var body: some View {
+    public var body: some View {
         NavigationView {
             VStack {
                 if viewModel.output.state == .initialzed {
