@@ -21,10 +21,10 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         NavigationView {
             VStack {
                 if viewModel.output.state == .initialzed {
-                    DataLoadingView()
-                } else if viewModel.output.state == .dataLoading {
-                    DataLoadingView()
-                } else if viewModel.output.state == .dataFeched {
+                    Spacer()
+                } else if viewModel.output.state == .error {
+                    ErrorView()
+                } else {
                     ScrollView {
                         LazyVStack {
                             ForEach(viewModel.output.items.indices, id: \.self) { index in
@@ -42,12 +42,23 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                         }
                         .padding([.leading, .trailing], 8)
                     }
-                } else {
-                    ErrorView()
+                    .padding(.top, 1) // ScrollViewをpullするとカクつく事象のworkaround
+                    .refreshControl(onValueChanged: { refreshControl in
+                        viewModel.input.onRefresh.send({
+                            refreshControl.endRefreshing()
+                        })
+                    })
                 }
             }
+            .overlay(
+                VStack {
+                    if viewModel.output.state == .dataLoading {
+                        DataLoadingView()
+                    }
+                }
+            )
             .navigationBarTitle("Home")
-            .onLoad(perform: {
+            .onLoad(perform: {                
                 viewModel.input.onLoad.send()
             })
             .alert(isPresented: $viewModel.output.isAlertShowing) {
@@ -81,8 +92,9 @@ struct HomeView_Previews: PreviewProvider {
         var output: Output = .init()
 
         final class Input: HomeViewModelInput {
-            var onLoad: PassthroughSubject<Void, Error> = .init()
+            var onLoad: PassthroughSubject<Void, Never> = .init()
             var onTappedCardView: PassthroughSubject<Int, Never> = .init()
+            var onRefresh: PassthroughSubject<onRefreshCompletion, Never> = .init()
         }
         final class Binding: HomeViewModelBinding {}
         final class Output: HomeViewModelOutput {

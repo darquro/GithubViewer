@@ -15,8 +15,10 @@ public protocol HomeViewModelProtocol: ViewModelObject where Input: HomeViewMode
 }
 
 public protocol HomeViewModelInput: InputObject {
-    var onLoad: PassthroughSubject<Void, Error> { get }
+    typealias onRefreshCompletion = () -> Void
+    var onLoad: PassthroughSubject<Void, Never> { get }
     var onTappedCardView: PassthroughSubject<Int, Never> { get }
+    var onRefresh: PassthroughSubject<onRefreshCompletion, Never> { get }
 }
 
 public protocol HomeViewModelBinding: BindingObject {
@@ -35,8 +37,9 @@ public enum HomeViewModelState: String {
 public final class HomeViewModel: HomeViewModelProtocol {
 
     final public class Input: HomeViewModelInput {
-        public var onLoad = PassthroughSubject<Void, Error>()
-        public var onTappedCardView = PassthroughSubject<Int, Never>()
+        public var onLoad: PassthroughSubject<Void, Never> = .init()
+        public var onTappedCardView: PassthroughSubject<Int, Never> = .init()
+        public var onRefresh: PassthroughSubject<onRefreshCompletion, Never> = .init()
 
         public init() {}
     }
@@ -46,7 +49,7 @@ public final class HomeViewModel: HomeViewModelProtocol {
     }
 
     final public class Output: HomeViewModelOutput {
-        public var state: HomeViewModelState = .initialzed
+        @Published public var state: HomeViewModelState = .initialzed
         @Published public var items: [CardViewEntity] = []
         @Published public var isAlertShowing: Bool = false
 
@@ -69,23 +72,9 @@ public final class HomeViewModel: HomeViewModelProtocol {
         self.useCase = useCase
 
         input.onLoad
-            .handleEvents(receiveOutput: {  [weak self] value in
-                self?.output.state = .dataLoading
-            })
-            .flatMap { _ in self.useCase.fetch() }
             .print("onLoad")
-            .sink(receiveCompletion: { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(_):
-                    self?.output.isAlertShowing = true
-                    self?.output.state = .error
-                }
-            }, receiveValue: { [weak self] value in
-                self?.output.items = value
-                self?.output.state = .dataFeched
-
+            .sink(receiveValue: { [weak self] in
+                self?.fetch(completion: nil)
             })
             .store(in: &cancellables)
 
@@ -93,6 +82,34 @@ public final class HomeViewModel: HomeViewModelProtocol {
             .print("onTappedCardView")
             .sink(receiveValue: { [weak self] index in
                 self?.output.items[index].isNavigationPushing = true
+            })
+            .store(in: &cancellables)
+
+        input.onRefresh
+            .print("onRefresh")
+            .sink(receiveValue: { [weak self] value in
+                self?.fetch(completion: value)
+            })
+            .store(in: &cancellables)
+    }
+
+    private func fetch(completion action: (() -> Void)?) {
+        output.state = .dataLoading
+        useCase.fetch()
+            .delay(for: 2, scheduler: DispatchQueue.main) // delayをかけて、画面の反映が早すぎないようにする
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(_):
+                    self?.output.isAlertShowing = true
+                    self?.output.state = .error
+                    action?()
+                }
+            }, receiveValue: { [weak self] value in
+                self?.output.items = value
+                self?.output.state = .dataFeched
+                action?()
             })
             .store(in: &cancellables)
     }

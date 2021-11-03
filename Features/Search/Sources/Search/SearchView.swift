@@ -28,9 +28,9 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                                 })
                 if viewModel.output.state == .initialzed {
                     Spacer()
-                } else if viewModel.output.state == .dataLoading {
-                    DataLoadingView()
-                } else if viewModel.output.state == .dataFeched {
+                } else if viewModel.output.state == .error {
+                    ErrorView()
+                } else {
                     ScrollView {
                         LazyVStack {
                             ForEach(viewModel.output.items.indices, id: \.self) { index in
@@ -44,10 +44,15 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                             }
                         }
                     }
-                } else {
-                    ErrorView()
                 }
             }
+            .overlay(
+                VStack {
+                    if viewModel.output.state == .dataLoading {
+                        DataLoadingView()
+                    }
+                }
+            )
             .padding(.horizontal, 8)
             .navigationBarTitle("Search")
             .navigationBarHidden(isKeywordEditing)
