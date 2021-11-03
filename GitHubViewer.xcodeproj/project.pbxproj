@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F122692272D14D3002BDA38 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F122691272D14D3002BDA38 /* NukeUI */; };
 		5F122694272D1CF3002BDA38 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F122693272D1CF3002BDA38 /* SafariView.swift */; };
 		5F122697272D202C002BDA38 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F122696272D202C002BDA38 /* WebView.swift */; };
 		5F1226AD272D3550002BDA38 /* GitHubViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226AC272D3550002BDA38 /* GitHubViewerTests.swift */; };
@@ -19,6 +18,8 @@
 		5F18785D2730348300D9DDD7 /* DataLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F18785C2730348300D9DDD7 /* DataLoadingView.swift */; };
 		5F18788A27323D7A00D9DDD7 /* GitHubAPIRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */; };
 		5F18788C27323EE900D9DDD7 /* APIClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788B27323EE900D9DDD7 /* APIClient */; };
+		5F1878902732449100D9DDD7 /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788F2732449100D9DDD7 /* Repositories */; };
+		5F1878922732454D00D9DDD7 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1878912732454D00D9DDD7 /* NukeUI */; };
 		5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5827255DEA00BA5DE8 /* Main.swift */; };
 		5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5927255DEA00BA5DE8 /* RootView.swift */; };
 		5F22DC8527255DED00BA5DE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		5F22DC9F2725753400BA5DE8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC9E2725753400BA5DE8 /* HomeView.swift */; };
 		5F22DCA22725776D00BA5DE8 /* BigCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DCA12725776D00BA5DE8 /* BigCardView.swift */; };
 		5F22DCA527257DAE00BA5DE8 /* CardViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DCA427257DAE00BA5DE8 /* CardViewEntity.swift */; };
-		5F4358862727095A00B37B17 /* GitHubSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4358852727095A00B37B17 /* GitHubSearchRepository.swift */; };
 		5F43588927270B4F00B37B17 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F43588827270B4F00B37B17 /* HomeUseCase.swift */; };
 		5F43588C272859CD00B37B17 /* View+ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F43588B272859CD00B37B17 /* View+ViewDidLoadModifier.swift */; };
 		5F4358952728699C00B37B17 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4358942728699C00B37B17 /* RefreshControl.swift */; };
@@ -60,6 +60,7 @@
 		5F18785C2730348300D9DDD7 /* DataLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoadingView.swift; sourceTree = "<group>"; };
 		5F18785F273233E000D9DDD7 /* APIClient */ = {isa = PBXFileReference; lastKnownFileType = folder; path = APIClient; sourceTree = "<group>"; };
 		5F18788727323A8D00D9DDD7 /* GitHubAPIRequest */ = {isa = PBXFileReference; lastKnownFileType = folder; path = GitHubAPIRequest; sourceTree = "<group>"; };
+		5F18788E2732447F00D9DDD7 /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Repositories; sourceTree = "<group>"; };
 		5F22DC5827255DEA00BA5DE8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		5F22DC5927255DEA00BA5DE8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		5F22DC9E2725753400BA5DE8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5F22DCA12725776D00BA5DE8 /* BigCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigCardView.swift; sourceTree = "<group>"; };
 		5F22DCA427257DAE00BA5DE8 /* CardViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewEntity.swift; sourceTree = "<group>"; };
-		5F4358852727095A00B37B17 /* GitHubSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchRepository.swift; sourceTree = "<group>"; };
 		5F43588827270B4F00B37B17 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		5F43588B272859CD00B37B17 /* View+ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ViewDidLoadModifier.swift"; sourceTree = "<group>"; };
 		5F4358942728699C00B37B17 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
@@ -90,9 +90,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F1878902732449100D9DDD7 /* Repositories in Frameworks */,
 				5F18788A27323D7A00D9DDD7 /* GitHubAPIRequest in Frameworks */,
 				5F18788C27323EE900D9DDD7 /* APIClient in Frameworks */,
-				5F122692272D14D3002BDA38 /* NukeUI in Frameworks */,
+				5F1878922732454D00D9DDD7 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +119,7 @@
 		5F18785E273232CF00D9DDD7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				5F18788E2732447F00D9DDD7 /* Repositories */,
 				5F18788727323A8D00D9DDD7 /* GitHubAPIRequest */,
 				5F18785F273233E000D9DDD7 /* APIClient */,
 			);
@@ -143,7 +145,6 @@
 				5F22DCAB27257FB800BA5DE8 /* Extensions */,
 				5F22DC9627255FB700BA5DE8 /* Main */,
 				5F22DC9527255F8800BA5DE8 /* Presentations */,
-				5F4358842727092100B37B17 /* Repositories */,
 				5F22DC9A2725624D00BA5DE8 /* Resouces */,
 			);
 			path = App;
@@ -209,14 +210,6 @@
 				5F1226BA272EA57B002BDA38 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		5F4358842727092100B37B17 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				5F4358852727095A00B37B17 /* GitHubSearchRepository.swift */,
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		5F7CB44A2726E69B0015AA5A /* Home */ = {
@@ -298,9 +291,10 @@
 			);
 			name = GitHubViewer;
 			packageProductDependencies = (
-				5F122691272D14D3002BDA38 /* NukeUI */,
 				5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */,
 				5F18788B27323EE900D9DDD7 /* APIClient */,
+				5F18788F2732449100D9DDD7 /* Repositories */,
+				5F1878912732454D00D9DDD7 /* NukeUI */,
 			);
 			productName = "GitHubViewer (iOS)";
 			productReference = 5F22DC5F27255DED00BA5DE8 /* GitHubViewer.app */;
@@ -377,7 +371,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F4358862727095A00B37B17 /* GitHubSearchRepository.swift in Sources */,
 				5F22DC9C272574EC00BA5DE8 /* SearchView.swift in Sources */,
 				5F7CB4522726E96A0015AA5A /* ViewModelObject.swift in Sources */,
 				5F4358952728699C00B37B17 /* RefreshControl.swift in Sources */,
@@ -661,11 +654,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F122691272D14D3002BDA38 /* NukeUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5F122690272D14D3002BDA38 /* XCRemoteSwiftPackageReference "NukeUI" */;
-			productName = NukeUI;
-		};
 		5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GitHubAPIRequest;
@@ -673,6 +661,15 @@
 		5F18788B27323EE900D9DDD7 /* APIClient */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = APIClient;
+		};
+		5F18788F2732449100D9DDD7 /* Repositories */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repositories;
+		};
+		5F1878912732454D00D9DDD7 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5F122690272D14D3002BDA38 /* XCRemoteSwiftPackageReference "NukeUI" */;
+			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

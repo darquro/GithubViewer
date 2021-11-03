@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-import GitHubAPIRequest
+import Repositories
 
 protocol HomeUseCaseProtocol {
     func fetch() -> AnyPublisher<[CardViewEntity], Error>
