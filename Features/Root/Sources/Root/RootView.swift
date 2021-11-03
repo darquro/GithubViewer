@@ -35,6 +35,11 @@ public struct RootView: View {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView()
+        Group {
+            RootView()
+                .preferredColorScheme(.light)
+            RootView()
+                .preferredColorScheme(.dark)
+        }
     }
 }

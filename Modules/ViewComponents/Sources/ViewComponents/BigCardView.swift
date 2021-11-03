@@ -27,23 +27,23 @@ public struct BigCardView: View {
 
                 VStack(alignment: .leading) {
                     Text(item.title)
-                        .foregroundColor(.black)
+                        .foregroundColor(Assets.Colors.titleText.color)
                         .font(.title)
                         .fontWeight(.bold)
 
                     Text(item.subTitle)
-                        .foregroundColor(.gray)
+                        .foregroundColor(Assets.Colors.secondaryText.color)
                         .font(.title2)
                 }
             }
 
             Text(item.description ?? "")
-                .foregroundColor(.black)
+                .foregroundColor(Assets.Colors.bodyText.color)
                 .lineLimit(nil)
 
             HStack {
                 Text(item.language ?? "")
-                    .foregroundColor(.gray)
+                    .foregroundColor(Assets.Colors.secondaryText.color)
                     .font(.footnote)
                 Spacer()
                 HStack(spacing: 4) {
@@ -51,7 +51,7 @@ public struct BigCardView: View {
                         .renderingMode(.template)
                         .foregroundColor(.yellow)
                     Text(String(item.star))
-                        .foregroundColor(.gray)
+                        .foregroundColor(Assets.Colors.secondaryText.color)
                         .font(.footnote)
                 }
             }
@@ -77,7 +77,12 @@ struct BigCardView_Previews: PreviewProvider {
                                                    url: .init(string: "https://github.com/apple/swift")!)
 
     static var previews: some View {
-        BigCardView(item: $item)
-            .previewLayout(.fixed(width: 400, height: 240))
+        Group {
+            BigCardView(item: $item)
+                .preferredColorScheme(.light)
+            BigCardView(item: $item)
+                .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 400, height: 240))
     }
 }

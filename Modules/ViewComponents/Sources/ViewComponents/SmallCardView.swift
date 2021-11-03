@@ -20,7 +20,7 @@ public struct SmallCardView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(item.title)
-                    .foregroundColor(.black)
+                    .foregroundColor(Assets.Colors.titleText.color)
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
@@ -31,18 +31,18 @@ public struct SmallCardView: View {
                     .shadow(color: .gray, radius: 1, x: 0, y: 0)
             }
             Text(item.description ?? "")
-                .foregroundColor(.black)
+                .foregroundColor(Assets.Colors.bodyText.color)
                 .lineLimit(nil)
             HStack {
                 Text(item.language ?? "")
-                    .foregroundColor(.gray)
+                    .foregroundColor(Assets.Colors.secondaryText.color)
                     .font(.footnote)
                 HStack(spacing: 4) {
                     Image(systemName: "star.fill")
                         .renderingMode(.template)
                         .foregroundColor(.yellow)
                     Text(String(item.star))
-                        .foregroundColor(.gray)
+                        .foregroundColor(Assets.Colors.secondaryText.color)
                         .font(.footnote)
                 }
             }
@@ -67,7 +67,12 @@ struct SmallCardView_Previews: PreviewProvider {
                                                    url: .init(string: "https://github.com/apple/swift")!)
 
     static var previews: some View {
-        SmallCardView(item: $item)
-            .previewLayout(.fixed(width: 400, height: 240))
+        Group {
+            SmallCardView(item: $item)
+                .preferredColorScheme(.light)
+            SmallCardView(item: $item)
+                .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 400, height: 240))
     }
 }

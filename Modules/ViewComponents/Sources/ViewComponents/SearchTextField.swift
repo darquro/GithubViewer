@@ -61,11 +61,18 @@ struct SearchTextFieldModifier_Preview: PreviewProvider {
     @State static var isNotEditing: Bool = false
 
     static var previews: some View {
-        SearchTextField(keyword: $keyword, isEditing: $isEditing)
-            .previewLayout(.fixed(width: 400, height: 200))
-
-        SearchTextField(keyword: $keyword, isEditing: $isNotEditing)
-            .previewLayout(.fixed(width: 400, height: 200))
+        Group {
+            Group {
+                SearchTextField(keyword: $keyword, isEditing: $isNotEditing)
+                SearchTextField(keyword: $keyword, isEditing: $isEditing)
+            }
+            .preferredColorScheme(.light)
+            Group {
+                SearchTextField(keyword: $keyword, isEditing: $isEditing)
+            }
+            .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 400, height: 200))
     }
 }
 

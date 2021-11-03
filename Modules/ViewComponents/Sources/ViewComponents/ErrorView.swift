@@ -27,6 +27,12 @@ public struct ErrorView: View {
 struct ErrorView_Previews: PreviewProvider {
 
     static var previews: some View {
-        ErrorView()
+        Group {
+            ErrorView()
+                .preferredColorScheme(.light)
+            ErrorView()
+                .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 200, height: 200))
     }
 }
