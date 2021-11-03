@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import ViewComponents
+import WebContent
 
 public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
@@ -29,7 +30,7 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                         ForEach(viewModel.output.items.indices, id: \.self) { index in
                             let item = viewModel.output.items[index]
                             NavigationLink(destination:
-                                            WebView(url: item.url)
+                                            WebContentView(url: item.url)
                                             .navigationBarTitle(item.title, displayMode: .inline),
                                            isActive: $viewModel.output.items[index].isNavigationPushing) {
                                 BigCardView(item: $viewModel.output.items[index])

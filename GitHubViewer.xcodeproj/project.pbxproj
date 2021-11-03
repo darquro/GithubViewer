@@ -39,6 +39,7 @@
 		5F38FD18273278A200928A66 /* Root */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Root; sourceTree = "<group>"; };
 		5F5F587B27326ADE0022E31F /* Home */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home; sourceTree = "<group>"; };
 		5F5F587E27326E310022E31F /* Search */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Search; sourceTree = "<group>"; };
+		5FE50C232732F36500E34E55 /* WebContent */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebContent; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,9 +139,10 @@
 		5F5F587A27326A960022E31F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5F5F587B27326ADE0022E31F /* Home */,
 				5F38FD18273278A200928A66 /* Root */,
 				5F5F587E27326E310022E31F /* Search */,
-				5F5F587B27326ADE0022E31F /* Home */,
+				5FE50C232732F36500E34E55 /* WebContent */,
 			);
 			path = Features;
 			sourceTree = "<group>";

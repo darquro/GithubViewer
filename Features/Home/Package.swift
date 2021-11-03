@@ -17,8 +17,9 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(path: "../ViewComponents"),
-        .package(path: "../Repositories"),
+        .package(path: "WebContent"),
+        .package(path: "../Modules/ViewComponents"),
+        .package(path: "../Modules/Repositories"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -26,6 +27,7 @@ let package = Package(
         .target(
             name: "Home",
             dependencies: [
+                "WebContent",
                 "ViewComponents",
                 "Repositories",
             ]),
