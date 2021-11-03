@@ -1,14 +1,7 @@
-//
-//  APIClient.swift
-//  GitHubViewer
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/25.
-//
-
 import Foundation
 import Combine
 
-protocol APIRequest {
+public protocol APIRequest {
     associatedtype Response: Decodable
     var baseURL: URL { get }
     var path: String { get }
@@ -16,7 +9,7 @@ protocol APIRequest {
     var decoder: JSONDecoder { get }
 }
 
-enum APIError: Error {
+public enum APIError: Error {
     case invalidURL
     case responseError
     case parseError(Error)
@@ -25,7 +18,7 @@ enum APIError: Error {
 extension APIRequest {
 
     /// Default Decoder
-    var decoder: JSONDecoder {
+    public var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -33,7 +26,7 @@ extension APIRequest {
 
     /// API Request
     /// - Returns: Publisher
-    func request() -> AnyPublisher<Response, APIError> {
+    public func request() -> AnyPublisher<Response, APIError> {
         guard let url = URL(string: path, relativeTo: baseURL),
               var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()

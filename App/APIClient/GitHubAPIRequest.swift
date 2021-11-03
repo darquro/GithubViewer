@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import APIClient
 
 protocol GitHubAPIRequest: APIRequest {
 }

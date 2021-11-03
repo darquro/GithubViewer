@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import APIClient
 
 protocol GitHubSearchRepositoryProtocol {
     func fetchSwiftTopicRepos() -> AnyPublisher<GitHubSearchAPIRequest.Response, APIError>
