@@ -29,6 +29,7 @@ public struct RootView: View {
                     Text("Search")
                 }
         }
+        .accentColor(Color("Accent", bundle: .module))
     }
 }
 
