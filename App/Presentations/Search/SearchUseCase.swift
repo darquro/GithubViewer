@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Repositories
+import ViewComponents
 
 protocol SearchUseCaseProtocol {
     func fetch(keyword: String) -> AnyPublisher<[CardViewEntity], Error>

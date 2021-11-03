@@ -1,11 +1,11 @@
-    import XCTest
-    @testable import GitHubSearchRepository
+import XCTest
+@testable import GitHubSearchRepository
 
-    final class GitHubSearchRepositoryTests: XCTestCase {
-        func testExample() {
-            // This is an example of a functional test case.
-            // Use XCTAssert and related functions to verify your tests produce the correct
-            // results.
-            XCTAssertEqual(GitHubSearchRepository().text, "Hello, World!")
-        }
+final class GitHubSearchRepositoryTests: XCTestCase {
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertEqual(GitHubSearchRepository().text, "Hello, World!")
     }
+}

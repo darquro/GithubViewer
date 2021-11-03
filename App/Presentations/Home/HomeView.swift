@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import ViewComponents
 
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 

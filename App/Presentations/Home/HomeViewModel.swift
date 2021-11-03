@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import ViewComponents
 
 protocol HomeViewModelProtocol: ViewModelObject where Input: HomeViewModelInput,
                                                       Binding: HomeViewModelBinding,

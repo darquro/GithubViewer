@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import ViewComponents
 
 protocol SearchViewModelProtocol: ViewModelObject where Input: SearchViewModelInput,
                                                         Binding: SearchViewModelBinding,

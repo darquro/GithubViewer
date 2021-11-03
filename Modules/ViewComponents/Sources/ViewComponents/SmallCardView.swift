@@ -8,11 +8,15 @@
 import SwiftUI
 import NukeUI
 
-struct SmallCardView: View {
+public struct SmallCardView: View {
 
     @Binding var item: CardViewEntity
 
-    var body: some View {
+    public init(item: Binding<CardViewEntity>) {
+        self._item = item
+    }
+
+    public var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 Text(item.title)

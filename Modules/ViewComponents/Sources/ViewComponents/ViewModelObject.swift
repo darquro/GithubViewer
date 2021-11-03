@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-protocol ViewModelObject: ObservableObject {
+public protocol ViewModelObject: ObservableObject {
 
     associatedtype Input: InputObject
     associatedtype Binding: BindingObject
@@ -21,7 +21,7 @@ protocol ViewModelObject: ObservableObject {
 
 }
 
-extension ViewModelObject where Binding.ObjectWillChangePublisher == ObservableObjectPublisher, Output.ObjectWillChangePublisher == ObservableObjectPublisher {
+public extension ViewModelObject where Binding.ObjectWillChangePublisher == ObservableObjectPublisher, Output.ObjectWillChangePublisher == ObservableObjectPublisher {
 
     var objectWillChange: AnyPublisher<Void, Never> {
         return Publishers.Merge(binding.objectWillChange, output.objectWillChange).eraseToAnyPublisher()
@@ -29,20 +29,20 @@ extension ViewModelObject where Binding.ObjectWillChangePublisher == ObservableO
 
 }
 
-protocol InputObject: AnyObject {
+public protocol InputObject: AnyObject {
 }
 
-protocol BindingObject: ObservableObject {
+public protocol BindingObject: ObservableObject {
 }
 
-protocol OutputObject: ObservableObject {
+public protocol OutputObject: ObservableObject {
 }
 
-@propertyWrapper struct BindableObject<T: BindingObject> {
+@propertyWrapper public struct BindableObject<T: BindingObject> {
 
-    @dynamicMemberLookup struct Wrapper {
+    @dynamicMemberLookup public struct Wrapper {
         fileprivate let binding: T
-        subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<T, Value>) -> Binding<Value> {
+        public subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<T, Value>) -> Binding<Value> {
             return .init(
                 get: { self.binding[keyPath: keyPath] },
                 set: { self.binding[keyPath: keyPath] = $0 }
@@ -50,10 +50,13 @@ protocol OutputObject: ObservableObject {
         }
     }
 
-    var wrappedValue: T
+    public var wrappedValue: T
 
-    var projectedValue: Wrapper {
+    public var projectedValue: Wrapper {
         return Wrapper(binding: wrappedValue)
     }
 
+    public init(_ wrappedValue: T) {
+        self.wrappedValue = wrappedValue
+    }
 }

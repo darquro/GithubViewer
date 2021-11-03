@@ -8,11 +8,15 @@
 import SwiftUI
 import NukeUI
 
-struct BigCardView: View {
+public struct BigCardView: View {
 
     @Binding var item: CardViewEntity
 
-    var body: some View {
+    public init(item: Binding<CardViewEntity>) {
+        self._item = item
+    }
+
+    public var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 LazyImage(source: item.imageURL, resizingMode: .aspectFill)

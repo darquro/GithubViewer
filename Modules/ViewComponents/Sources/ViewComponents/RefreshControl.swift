@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct RefreshControl: View {
+public struct RefreshControl: View {
 
     static let coordinateSpaceDefaultName = "RefreshControl"
     @State private var isRefreshing = false
@@ -16,7 +16,12 @@ struct RefreshControl: View {
     var coordinateSpaceName: String
     var onRefresh: () -> Void
 
-    var body: some View {
+    init(coordinateSpaceName: String, onRefresh: @escaping () -> Void) {
+        self.coordinateSpaceName = coordinateSpaceName
+        self.onRefresh = onRefresh
+    }
+
+    public var body: some View {
         GeometryReader { geometry in
             if geometry.frame(in: .named(coordinateSpaceName)).midY > 30 {
                 Spacer()
