@@ -75,7 +75,7 @@ public struct RefreshControlModifier: ViewModifier {
 
 public extension View {
 
-    func refreshControl(onValueChanged: @escaping (_ refreshControl: UIRefreshControl) -> Void) -> some View {
+    func refreshable(onValueChanged: @escaping (_ refreshControl: UIRefreshControl) -> Void) -> some View {
         self.modifier(RefreshControlModifier(onValueChanged: onValueChanged))
     }
 }
@@ -225,28 +225,5 @@ extension UIView {
         } else {
             superview?.searchViewAnchestorsFor(onViewFound)
         }
-    }
-
-    /// Search ancestral view hierarcy for the given view type.
-    func searchViewAnchestorsFor<ViewType: UIView>() -> ViewType? {
-        if let matchingView = self.superview as? ViewType {
-            return matchingView
-        } else {
-            return superview?.searchViewAnchestorsFor()
-        }
-    }
-
-    func printViewHierarchyInformation(_ level: Int = 0) {
-        printViewInformation(level)
-        self.subviews.forEach { $0.printViewHierarchyInformation(level + 1) }
-    }
-
-    func printViewInformation(_ level: Int) {
-        let leadingWhitespace = String(repeating: "    ", count: level)
-        let className = "\(Self.self)"
-        let superclassName = "\(self.superclass!)"
-        let frame = "\(self.frame)"
-        let id = (self.accessibilityIdentifier == nil) ? "" : " `\(self.accessibilityIdentifier!)`"
-        print("\(leadingWhitespace)\(className): \(superclassName)\(id) \(frame)")
     }
 }

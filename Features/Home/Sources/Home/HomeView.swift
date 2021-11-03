@@ -19,37 +19,35 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
     public var body: some View {
         NavigationView {
-            VStack {
+            ScrollView {
                 if viewModel.output.state == .initialzed {
                     Spacer()
                 } else if viewModel.output.state == .error {
                     ErrorView()
                 } else {
-                    ScrollView {
-                        LazyVStack {
-                            ForEach(viewModel.output.items.indices, id: \.self) { index in
-                                let item = viewModel.output.items[index]
-                                NavigationLink(destination:
-                                                WebView(url: item.url)
-                                                .navigationBarTitle(item.title, displayMode: .inline),
-                                               isActive: $viewModel.output.items[index].isNavigationPushing) {
-                                    BigCardView(item: $viewModel.output.items[index])
-                                        .onTapGesture(perform: {
-                                            viewModel.input.onTappedCardView.send(index)
-                                        })
-                                }
+                    LazyVStack {
+                        ForEach(viewModel.output.items.indices, id: \.self) { index in
+                            let item = viewModel.output.items[index]
+                            NavigationLink(destination:
+                                            WebView(url: item.url)
+                                            .navigationBarTitle(item.title, displayMode: .inline),
+                                           isActive: $viewModel.output.items[index].isNavigationPushing) {
+                                BigCardView(item: $viewModel.output.items[index])
+                                    .onTapGesture(perform: {
+                                        viewModel.input.onTappedCardView.send(index)
+                                    })
                             }
                         }
-                        .padding([.leading, .trailing], 8)
                     }
-                    .padding(.top, 1) // ScrollViewをpullするとカクつく事象のworkaround
-                    .refreshControl(onValueChanged: { refreshControl in
-                        viewModel.input.onRefresh.send({
-                            refreshControl.endRefreshing()
-                        })
-                    })
+                    .padding([.leading, .trailing], 8)
                 }
             }
+            .padding(.top, 1) // ScrollViewをpullするとカクつく事象のworkaround。ただしNavigationBarがScroll量に応じて小さくならない。
+            .refreshable(onValueChanged: { refreshControl in
+                viewModel.input.onRefresh.send({
+                    refreshControl.endRefreshing()
+                })
+            })
             .overlay(
                 VStack {
                     if viewModel.output.state == .dataLoading {

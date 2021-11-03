@@ -14,10 +14,12 @@ public struct ErrorView: View {
 
     public var body: some View {
         VStack {
-            Spacer()
+            Label("Opps!", systemImage: "exclamationmark.triangle.fill")
+                .foregroundColor(.red)
+                .font(.title)
             Text("An error has occurred.\nPlease try again.")
-                .multilineTextAlignment(.center)                
-            Spacer()
+                .multilineTextAlignment(.center)
+                .font(.body)
         }
     }
 }

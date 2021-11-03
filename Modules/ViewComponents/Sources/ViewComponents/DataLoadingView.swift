@@ -14,11 +14,9 @@ public struct DataLoadingView: View {
 
     public var body: some View {
         VStack {
-            Spacer()
             ProgressView("loading...")
                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 .foregroundColor(.white)
-            Spacer()
         }
         .frame(width: 100, height: 100)
         .background(Color.black.opacity(0.5))
