@@ -13,7 +13,6 @@
 		5F18788A27323D7A00D9DDD7 /* GitHubAPIRequest in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */; };
 		5F18788C27323EE900D9DDD7 /* APIClient in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788B27323EE900D9DDD7 /* APIClient */; };
 		5F1878902732449100D9DDD7 /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = 5F18788F2732449100D9DDD7 /* Repositories */; };
-		5F1878922732454D00D9DDD7 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5F1878912732454D00D9DDD7 /* NukeUI */; };
 		5F187895273248F600D9DDD7 /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 5F187894273248F600D9DDD7 /* ViewComponents */; };
 		5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5827255DEA00BA5DE8 /* Main.swift */; };
 		5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5927255DEA00BA5DE8 /* RootView.swift */; };
@@ -72,7 +71,6 @@
 				5F18788A27323D7A00D9DDD7 /* GitHubAPIRequest in Frameworks */,
 				5F187895273248F600D9DDD7 /* ViewComponents in Frameworks */,
 				5F18788C27323EE900D9DDD7 /* APIClient in Frameworks */,
-				5F1878922732454D00D9DDD7 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +236,6 @@
 				5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */,
 				5F18788B27323EE900D9DDD7 /* APIClient */,
 				5F18788F2732449100D9DDD7 /* Repositories */,
-				5F1878912732454D00D9DDD7 /* NukeUI */,
 				5F187894273248F600D9DDD7 /* ViewComponents */,
 			);
 			productName = "GitHubViewer (iOS)";
@@ -273,7 +270,6 @@
 			);
 			mainGroup = 5F22DC5227255DEA00BA5DE8;
 			packageReferences = (
-				5F122690272D14D3002BDA38 /* XCRemoteSwiftPackageReference "NukeUI" */,
 			);
 			productRefGroup = 5F22DC6027255DED00BA5DE8 /* Products */;
 			projectDirPath = "";
@@ -575,17 +571,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		5F122690272D14D3002BDA38 /* XCRemoteSwiftPackageReference "NukeUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kean/NukeUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		5F18788927323D7A00D9DDD7 /* GitHubAPIRequest */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -598,11 +583,6 @@
 		5F18788F2732449100D9DDD7 /* Repositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Repositories;
-		};
-		5F1878912732454D00D9DDD7 /* NukeUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5F122690272D14D3002BDA38 /* XCRemoteSwiftPackageReference "NukeUI" */;
-			productName = NukeUI;
 		};
 		5F187894273248F600D9DDD7 /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
