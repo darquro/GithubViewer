@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import GitHubAPIRequest
 
 protocol HomeUseCaseProtocol {
     func fetch() -> AnyPublisher<[CardViewEntity], Error>
@@ -18,8 +19,8 @@ final class HomeUseCase: HomeUseCaseProtocol {
 
     func fetch() -> AnyPublisher<[CardViewEntity], Error> {
         searchRepository.fetchSwiftTopicRepos()
-            .map {
-                $0.items.map {
+            .map { response in
+                response.items.map {
                     CardViewEntity(imageURL: $0.owner.avatarUrl,
                                    title: $0.name,
                                    subTitle: $0.owner.login,

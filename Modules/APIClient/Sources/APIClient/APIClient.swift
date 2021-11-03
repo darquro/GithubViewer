@@ -15,10 +15,10 @@ public enum APIError: Error {
     case parseError(Error)
 }
 
-extension APIRequest {
+public extension APIRequest {
 
     /// Default Decoder
-    public var decoder: JSONDecoder {
+    var decoder: JSONDecoder {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
@@ -26,7 +26,7 @@ extension APIRequest {
 
     /// API Request
     /// - Returns: Publisher
-    public func request() -> AnyPublisher<Response, APIError> {
+    func request() -> AnyPublisher<Response, APIError> {
         guard let url = URL(string: path, relativeTo: baseURL),
               var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             return Fail(error: APIError.invalidURL).eraseToAnyPublisher()

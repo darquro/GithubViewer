@@ -1,20 +1,21 @@
 //
 //  GitHubSearchAPIRequest.swift
-//  GitHubViewer
+//  
 //
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/25.
+//  Created by Kuroda, Yuki | Yuki | ECID on 2021/11/03.
 //
 
 import Foundation
+import APIClient
 
 /// GitHub Search API Request
 /// Sample URL: https://api.github.com/search/repositories\?q=topic:ios+language:swift+stars:\>\=1000\&sort\=stars\&order\=desc
-struct GitHubSearchAPIRequest: GitHubAPIRequest {
-    typealias Response = GitHubSearchResponse
+public struct GitHubSearchAPIRequest: GitHubAPIRequest {
+    public typealias Response = GitHubSearchResponse
 
-    var path: String = "/search/repositories"
+    public var path: String = "/search/repositories"
 
-    var queryItems: [URLQueryItem]? {
+    public var queryItems: [URLQueryItem]? {
         var items = [URLQueryItem]([
             .init(name: "sort", value: "stars"),
             .init(name: "order", value: "desc")
@@ -53,10 +54,10 @@ struct GitHubSearchAPIRequest: GitHubAPIRequest {
     let hasStars: Int?
     let topic: String?
 
-    init(keyword: String? = nil,
-         language: String? = nil,
-         hasStars: Int? = nil,
-         topic: String? = nil) {
+    public init(keyword: String? = nil,
+                language: String? = nil,
+                hasStars: Int? = nil,
+                topic: String? = nil) {
         self.language = language
         self.keyword = (keyword?.isEmpty ?? true) ? "" : keyword
         self.hasStars = hasStars
