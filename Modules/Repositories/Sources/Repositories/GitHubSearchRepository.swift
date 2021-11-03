@@ -10,7 +10,7 @@ public protocol GitHubSearchRepositoryProtocol {
 
 public final class GitHubSearchRepository: GitHubSearchRepositoryProtocol {
 
-    public init () {}
+    public init() {}
 
     public func fetchSwiftTopicRepos() -> AnyPublisher<GitHubSearchResponse, APIError> {
         GitHubSearchAPIRequest(language: "swift", hasStars: 1000, topic: "swift").request()

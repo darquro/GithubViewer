@@ -9,12 +9,14 @@ import SwiftUI
 import Home
 import Search
 
-struct RootView: View {
+public struct RootView: View {
 
     @StateObject var homeViewModel: HomeViewModel = .init()
     @StateObject var searchViewModel: SearchViewModel = .init()
 
-    var body: some View {
+    public init() {}
+
+    public var body: some View {
         TabView {
             HomeView(viewModel: homeViewModel)
                 .tabItem {

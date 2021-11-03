@@ -10,7 +10,7 @@ import SwiftUI
 
 public struct ErrorView: View {
 
-    public init () {}
+    public init() {}
 
     public var body: some View {
         VStack {

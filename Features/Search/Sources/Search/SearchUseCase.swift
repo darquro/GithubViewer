@@ -18,7 +18,7 @@ public final class SearchUseCase: SearchUseCaseProtocol {
 
     private let searchRepository: GitHubSearchRepositoryProtocol = GitHubSearchRepository()
 
-    public init () {}
+    public init() {}
 
     public func fetch(keyword: String) -> AnyPublisher<[CardViewEntity], Error> {
         searchRepository.fetch(keyword: keyword)

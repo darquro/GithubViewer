@@ -37,13 +37,13 @@ public final class SearchViewModel: SearchViewModelProtocol {
     final public class Input: SearchViewModelInput {
         public var onCommit: PassthroughSubject<Void, Never> = .init()
 
-        public init () {}
+        public init() {}
     }
 
     final public class Binding: SearchViewModelBinding {
         @Published public var keyword: String = ""
 
-        public init () {}
+        public init() {}
     }
 
     final public class Output: SearchViewModelOutput {
@@ -51,7 +51,7 @@ public final class SearchViewModel: SearchViewModelProtocol {
         @Published public var items: [CardViewEntity] = []
         @Published public var isAlertShowing: Bool = false
 
-        public init () {}
+        public init() {}
     }
 
     public let input: Input

@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		5F1226AD272D3550002BDA38 /* GitHubViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1226AC272D3550002BDA38 /* GitHubViewerTests.swift */; };
 		5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5827255DEA00BA5DE8 /* Main.swift */; };
-		5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22DC5927255DEA00BA5DE8 /* RootView.swift */; };
 		5F22DC8527255DED00BA5DE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */; };
-		5F5F587D27326DE10022E31F /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5F587C27326DE10022E31F /* Home */; };
-		5F5F588027326FC00022E31F /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = 5F5F587F27326FC00022E31F /* Search */; };
+		5F38FD1A273279A700928A66 /* Root in Frameworks */ = {isa = PBXBuildFile; productRef = 5F38FD19273279A700928A66 /* Root */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +33,10 @@
 		5F18788E2732447F00D9DDD7 /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Repositories; sourceTree = "<group>"; };
 		5F1878932732472F00D9DDD7 /* ViewComponents */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ViewComponents; sourceTree = "<group>"; };
 		5F22DC5827255DEA00BA5DE8 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		5F22DC5927255DEA00BA5DE8 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		5F22DC5A27255DEC00BA5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5F22DC5F27255DED00BA5DE8 /* GitHubViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F22DC6227255DED00BA5DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F38FD18273278A200928A66 /* Root */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Root; sourceTree = "<group>"; };
 		5F5F587B27326ADE0022E31F /* Home */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Home; sourceTree = "<group>"; };
 		5F5F587E27326E310022E31F /* Search */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Search; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,8 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F5F588027326FC00022E31F /* Search in Frameworks */,
-				5F5F587D27326DE10022E31F /* Home in Frameworks */,
+				5F38FD1A273279A700928A66 /* Root in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				5F22DC5827255DEA00BA5DE8 /* Main.swift */,
-				5F22DC5927255DEA00BA5DE8 /* RootView.swift */,
 				5F22DC9A2725624D00BA5DE8 /* Resouces */,
 			);
 			path = App;
@@ -142,6 +138,7 @@
 		5F5F587A27326A960022E31F /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				5F38FD18273278A200928A66 /* Root */,
 				5F5F587E27326E310022E31F /* Search */,
 				5F5F587B27326ADE0022E31F /* Home */,
 			);
@@ -183,8 +180,7 @@
 			);
 			name = GitHubViewer;
 			packageProductDependencies = (
-				5F5F587C27326DE10022E31F /* Home */,
-				5F5F587F27326FC00022E31F /* Search */,
+				5F38FD19273279A700928A66 /* Root */,
 			);
 			productName = "GitHubViewer (iOS)";
 			productReference = 5F22DC5F27255DED00BA5DE8 /* GitHubViewer.app */;
@@ -260,7 +256,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F22DC8327255DED00BA5DE8 /* RootView.swift in Sources */,
 				5F22DC8127255DED00BA5DE8 /* Main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,13 +509,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5F5F587C27326DE10022E31F /* Home */ = {
+		5F38FD19273279A700928A66 /* Root */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Home;
-		};
-		5F5F587F27326FC00022E31F /* Search */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Search;
+			productName = Root;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

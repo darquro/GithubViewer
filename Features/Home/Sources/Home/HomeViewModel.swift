@@ -38,11 +38,11 @@ public final class HomeViewModel: HomeViewModelProtocol {
         public var onLoad = PassthroughSubject<Void, Error>()
         public var onTappedCardView = PassthroughSubject<Int, Never>()
 
-        public init () {}
+        public init() {}
     }
 
     final public class Binding: HomeViewModelBinding {
-        public init () {}
+        public init() {}
     }
 
     final public class Output: HomeViewModelOutput {
@@ -50,7 +50,7 @@ public final class HomeViewModel: HomeViewModelProtocol {
         @Published public var items: [CardViewEntity] = []
         @Published public var isAlertShowing: Bool = false
 
-        public init () {}
+        public init() {}
     }
 
     public let input: Input

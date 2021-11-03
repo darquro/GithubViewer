@@ -18,7 +18,7 @@ public final class HomeUseCase: HomeUseCaseProtocol {
 
     private let searchRepository: GitHubSearchRepositoryProtocol = GitHubSearchRepository()
 
-    public init () {}
+    public init() {}
 
     public func fetch() -> AnyPublisher<[CardViewEntity], Error> {
         searchRepository.fetchSwiftTopicRepos()
