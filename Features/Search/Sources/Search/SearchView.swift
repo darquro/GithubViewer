@@ -31,6 +31,7 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                     Spacer()
                 } else if viewModel.output.state == .error {
                     ErrorView()
+                    Spacer()
                 } else {
                     ScrollView {
                         LazyVStack {
@@ -39,7 +40,7 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                                 NavigationLink(
                                     destination: WebContentView(url: item.url).navigationBarTitle(item.title, displayMode: .inline),
                                     isActive: $viewModel.output.items[index].isNavigationPushing
-                                    ) {
+                                ) {
                                     SmallCardView(item: $viewModel.output.items[index])
                                 }
                             }
