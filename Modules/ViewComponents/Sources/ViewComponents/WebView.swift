@@ -12,40 +12,31 @@ import Combine
 public struct WebView: UIViewRepresentable {
     public typealias UIViewType = WKWebView
 
-    var url: URL?
-    let webView = WKWebView(frame: .zero)
+    public let wkWebView = WKWebView(frame: .zero)
 
-    public init(url: URL? = nil) {
-        self.url = url
+    public init() {
     }
 
     public func makeUIView(context: Context) -> WKWebView {
-        webView
+        wkWebView
     }
 
     public func updateUIView(_ uiView: WKWebView, context: Context) {
-        if let url = url {
-            uiView.load(.init(url: url))
-        }
-    }
-
-    public func publisher<Value>(for keyPath: KeyPath<WKWebView, Value>, options: NSKeyValueObservingOptions = [.initial, .new]) -> NSObject.KeyValueObservingPublisher<WKWebView, Value> {
-        webView.publisher(for: keyPath, options: options)
     }
 
     public func load(url: URL) {
-        webView.load(.init(url: url))
+        wkWebView.load(.init(url: url))
     }
 
     public func goBack() {
-        webView.goBack()
+        wkWebView.goBack()
     }
 
     public func goForward() {
-        webView.goForward()
+        wkWebView.goForward()
     }
 
     public func reload() {
-        webView.reload()
+        wkWebView.reload()
     }
 }

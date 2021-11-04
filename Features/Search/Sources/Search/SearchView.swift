@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import ViewComponents
+import WebContent
 
 public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
 
@@ -36,7 +37,7 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                             ForEach(viewModel.output.items.indices, id: \.self) { index in
                                 let item = viewModel.output.items[index]
                                 NavigationLink(
-                                    destination: WebView(url: item.url).navigationBarTitle(item.title, displayMode: .inline),
+                                    destination: WebContentView(url: item.url).navigationBarTitle(item.title, displayMode: .inline),
                                     isActive: $viewModel.output.items[index].isNavigationPushing
                                     ) {
                                     SmallCardView(item: $viewModel.output.items[index])

@@ -5,38 +5,25 @@ import ViewComponents
 public struct WebContentView: View {
 
     let url: URL
-    var webView: WebView
-    @State var canGoBack: Bool = false
-    @State var canGoForward: Bool = false
-    @State var estimatedProgress: Double = 0
-    private var cancellables = Set<AnyCancellable>()
+    let webView: WebView = WebView()
+    @ObservedObject var viewModel = WebContentViewModel()
 
     public init(url: URL) {
         self.url = url
-        self.webView = WebView(url: url)
-        webView.publisher(for: \.canGoBack)
-            .print("canGoBack")
-            .assign(to: \.canGoBack, on: self)
-            .store(in: &cancellables)
-
-        webView.publisher(for: \.canGoForward)
-            .print("canGoForward")
-            .assign(to: \.canGoForward, on: self)
-            .store(in: &cancellables)
-
-        webView.publisher(for: \.estimatedProgress)
-            .print("estimatedProgress")
-            .assign(to: \.estimatedProgress, on: self)
-            .store(in: &cancellables)
+        viewModel.webView = webView.wkWebView
+        viewModel.subscribe()
     }
 
     public var body: some View {
-        VStack {
-            ProgressView(value: estimatedProgress)
+        ZStack(alignment: .top) {
             webView
                 .onLoad {
                     webView.load(url: url)
                 }
+
+            ProgressView(value: viewModel.binding.estimatedProgress)
+                .opacity(viewModel.output.loadCompleted ? 0 : 1)
+                .transition(.opacity)
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
@@ -45,13 +32,13 @@ public struct WebContentView: View {
                 }) {
                     Image(systemName: "chevron.left")
                 }
-                .disabled(!canGoBack)
+                .disabled(!viewModel.binding.canGoBack)
                 Button(action: {
                     webView.goForward()
                 }) {
                     Image(systemName: "chevron.right")
                 }
-                .disabled(!canGoForward)
+                .disabled(!viewModel.binding.canGoForward)
                 Spacer()
                 Button(action: {
                     webView.reload()                    
