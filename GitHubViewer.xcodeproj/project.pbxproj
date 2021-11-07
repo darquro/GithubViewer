@@ -77,7 +77,7 @@
 			path = GitHubViewerTests;
 			sourceTree = "<group>";
 		};
-		5F18785E273232CF00D9DDD7 /* Modules */ = {
+		5F18785E273232CF00D9DDD7 /* CoreModules */ = {
 			isa = PBXGroup;
 			children = (
 				5F1878932732472F00D9DDD7 /* ViewComponents */,
@@ -85,7 +85,7 @@
 				5F18788727323A8D00D9DDD7 /* GitHubAPIRequest */,
 				5F18785F273233E000D9DDD7 /* APIClient */,
 			);
-			path = Modules;
+			path = CoreModules;
 			sourceTree = "<group>";
 		};
 		5F22DC5227255DEA00BA5DE8 = {
@@ -93,10 +93,10 @@
 			children = (
 				5F22DC5727255DEA00BA5DE8 /* App */,
 				5F22DC6127255DED00BA5DE8 /* Configurations */,
-				5F5F587A27326A960022E31F /* Features */,
+				5F5F587A27326A960022E31F /* FeatureModules */,
 				5F1226A2272D2FF1002BDA38 /* Frameworks */,
 				5F1226AB272D3550002BDA38 /* GitHubViewerTests */,
-				5F18785E273232CF00D9DDD7 /* Modules */,
+				5F18785E273232CF00D9DDD7 /* CoreModules */,
 				5F22DC6027255DED00BA5DE8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 			path = Resouces;
 			sourceTree = "<group>";
 		};
-		5F5F587A27326A960022E31F /* Features */ = {
+		5F5F587A27326A960022E31F /* FeatureModules */ = {
 			isa = PBXGroup;
 			children = (
 				5F5F587B27326ADE0022E31F /* Home */,
@@ -144,7 +144,7 @@
 				5F5F587E27326E310022E31F /* Search */,
 				5FE50C232732F36500E34E55 /* WebContent */,
 			);
-			path = Features;
+			path = FeatureModules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
