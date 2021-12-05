@@ -9,34 +9,15 @@ import Foundation
 import Combine
 import ViewComponents
 
-public protocol HomeViewModelProtocol: ViewModelObject where Input: HomeViewModelInput,
-                                                      Binding: HomeViewModelBinding,
-                                                      Output: HomeViewModelOutput {
-}
-
-public protocol HomeViewModelInput: InputObject {
-    typealias onRefreshCompletion = () -> Void
-    var onLoad: PassthroughSubject<Void, Never> { get }
-    var onTappedCardView: PassthroughSubject<Int, Never> { get }
-    var onRefresh: PassthroughSubject<onRefreshCompletion, Never> { get }
-}
-
-public protocol HomeViewModelBinding: BindingObject {
-}
-
-public protocol HomeViewModelOutput: OutputObject {
-    var state: HomeViewModelState { get }
-    var items: [CardViewEntity] { get set }
-    var isAlertShowing: Bool { get set }
-}
-
 public enum HomeViewModelState: String {
     case initialzed, dataLoading, dataFeched, error
 }
 
-public final class HomeViewModel: HomeViewModelProtocol {
+public final class HomeViewModel: ViewModelObject {
 
-    final public class Input: HomeViewModelInput {
+    public typealias onRefreshCompletion = () -> Void
+
+    final public class Input: InputObject {
         public var onLoad: PassthroughSubject<Void, Never> = .init()
         public var onTappedCardView: PassthroughSubject<Int, Never> = .init()
         public var onRefresh: PassthroughSubject<onRefreshCompletion, Never> = .init()
@@ -44,30 +25,32 @@ public final class HomeViewModel: HomeViewModelProtocol {
         public init() {}
     }
 
-    final public class Binding: HomeViewModelBinding {
+    final public class Binding: BindingObject {
+        @Published public var isAlertShowing: Bool = false
+        @Published public var items: [CardViewEntity] = []
+
         public init() {}
     }
 
-    final public class Output: HomeViewModelOutput {
+    final public class Output: OutputObject {
         @Published public var state: HomeViewModelState = .initialzed
-        @Published public var items: [CardViewEntity] = []
-        @Published public var isAlertShowing: Bool = false
 
         public init() {}
     }
 
     public let input: Input
-    public var binding: Binding
-    public var output: Output
+    @BindableObject public var binding: Binding
+    public let output: Output
+
     private let useCase: HomeUseCaseProtocol
     private var cancellables = Set<AnyCancellable>()
 
-    public init(input: Input = Input(),
-                binding: Binding = Binding(),
-                output: Output = Output(),
+    public init(input: Input = .init(),
+                binding: BindableObject<Binding> = .init(.init()),
+                output: Output = .init(),
                 useCase: HomeUseCaseProtocol = HomeUseCase()) {
         self.input = input
-        self.binding = binding
+        self._binding = binding
         self.output = output
         self.useCase = useCase
 
@@ -81,7 +64,7 @@ public final class HomeViewModel: HomeViewModelProtocol {
         input.onTappedCardView
             .print("onTappedCardView")
             .sink(receiveValue: { [weak self] index in
-                self?.output.items[index].isNavigationPushing = true
+                self?.binding.items[index].isNavigationPushing = true
             })
             .store(in: &cancellables)
 
@@ -102,12 +85,12 @@ public final class HomeViewModel: HomeViewModelProtocol {
                 case .finished:
                     break
                 case .failure(_):
-                    self?.output.isAlertShowing = true
+                    self?.binding.isAlertShowing = true
                     self?.output.state = .error
                     action?()
                 }
             }, receiveValue: { [weak self] value in
-                self?.output.items = value
+                self?.binding.items = value
                 self?.output.state = .dataFeched
                 action?()
             })

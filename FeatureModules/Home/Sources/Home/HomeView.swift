@@ -10,11 +10,11 @@ import Combine
 import ViewComponents
 import WebContent
 
-public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
+public struct HomeView: View {
 
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: HomeViewModel
 
-    public init(viewModel: ViewModel) {
+    public init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
     }
 
@@ -27,13 +27,13 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                     ErrorView()
                 } else {
                     LazyVStack {
-                        ForEach(viewModel.output.items.indices, id: \.self) { index in
-                            let item = viewModel.output.items[index]
+                        ForEach(viewModel.binding.items.indices, id: \.self) { index in
+                            let item = viewModel.binding.items[index]
                             NavigationLink(destination:
                                             WebContentView(url: item.url)
                                             .navigationBarTitle(item.title, displayMode: .inline),
-                                           isActive: $viewModel.output.items[index].isNavigationPushing) {
-                                BigCardView(item: $viewModel.output.items[index])
+                                           isActive: $viewModel.binding.items[index].isNavigationPushing) {
+                                BigCardView(item: viewModel.$binding.items[index])
                                     .onTapGesture(perform: {
                                         viewModel.input.onTappedCardView.send(index)
                                     })
@@ -60,7 +60,7 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             .onLoad(perform: {                
                 viewModel.input.onLoad.send()
             })
-            .alert(isPresented: $viewModel.output.isAlertShowing) {
+            .alert(isPresented: viewModel.$binding.isAlertShowing) {
                 Alert(title: Text("Error"),
                       message: Text("Please retry."))
             }
@@ -70,61 +70,29 @@ public struct HomeView<ViewModel: HomeViewModelProtocol>: View {
 
 struct HomeView_Previews: PreviewProvider {
 
-    @StateObject static var viewModel: ViewModelMock = .init()
-
     static var previews: some View {
         Group {
-            HomeView(viewModel: viewModel.state(.initialzed))
+            HomeView(viewModel: dataFetchedViewModel)
                 .previewDisplayName(HomeViewModelState.initialzed.rawValue)
-            HomeView(viewModel: viewModel.state(.dataLoading))
-                .previewDisplayName(HomeViewModelState.dataLoading.rawValue)
-            HomeView(viewModel: viewModel.state(.dataFeched))
-                .previewDisplayName(HomeViewModelState.dataFeched.rawValue)
-            HomeView(viewModel: viewModel.state(.error))
-                .previewDisplayName(HomeViewModelState.error.rawValue)
         }
     }
 
-    final class ViewModelMock: HomeViewModelProtocol {
-        let input: Input = .init()
-        var binding: Binding = .init()
-        var output: Output = .init()
+    static var dataFetchedViewModel: HomeViewModel {
+        let binding = HomeViewModel.Binding()
+        let entity = CardViewEntity(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
+                                    title: "swift",
+                                    subTitle: "apple",
+                                    language: "Swift",
+                                    star: 1000,
+                                    description: "The Swift Programming Language",
+                                    url: .init(string: "https://github.com/apple/swift")!)
 
-        final class Input: HomeViewModelInput {
-            var onLoad: PassthroughSubject<Void, Never> = .init()
-            var onTappedCardView: PassthroughSubject<Int, Never> = .init()
-            var onRefresh: PassthroughSubject<onRefreshCompletion, Never> = .init()
-        }
-        final class Binding: HomeViewModelBinding {}
-        final class Output: HomeViewModelOutput {
-            var state: HomeViewModelState = .initialzed
-            var items: [CardViewEntity] = []
-            var isAlertShowing: Bool = false
+        binding.items = [CardViewEntity](repeating: entity, count: 3)
+        let output = HomeViewModel.Output()
+        output.state = .dataFeched
 
-        }
-
-        func state(_ state: HomeViewModelState) -> Self {
-            output.state = state
-            switch state {
-            case .initialzed:
-                break
-            case .dataLoading:
-                break
-            case .dataFeched:
-                let entity = CardViewEntity(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
-                                            title: "swift",
-                                            subTitle: "apple",
-                                            language: "Swift",
-                                            star: 1000,
-                                            description: "The Swift Programming Language",
-                                            url: .init(string: "https://github.com/apple/swift")!)
-
-                output.items = [CardViewEntity](repeating: entity, count: 3)
-            case .error:
-                output.isAlertShowing = true
-                break
-            }
-            return self
-        }
+        return HomeViewModel(
+            binding: BindableObject<HomeViewModel.Binding>(binding),
+            output: output)
     }
 }

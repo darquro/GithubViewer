@@ -16,8 +16,8 @@ public protocol ViewModelObject: ObservableObject {
     associatedtype Output: OutputObject
 
     var input: Input { get }
-    var binding: Binding { get set }
-    var output: Output { get set }
+    var binding: Binding { get }
+    var output: Output { get }
 
 }
 

@@ -10,19 +10,19 @@ import Combine
 import ViewComponents
 import WebContent
 
-public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
+public struct SearchView: View {
 
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: SearchViewModel
     @State var isKeywordEditing: Bool = false
 
-    public init(viewModel: ViewModel) {
+    public init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
     }
 
     public var body: some View {
         NavigationView {
             VStack {
-                SearchTextField(keyword: $viewModel.binding.keyword,
+                SearchTextField(keyword: viewModel.$binding.keyword,
                                 isEditing: $isKeywordEditing,
                                 onCommit: {
                                     viewModel.input.onCommit.send()
@@ -35,13 +35,13 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
                 } else {
                     ScrollView {
                         LazyVStack {
-                            ForEach(viewModel.output.items.indices, id: \.self) { index in
-                                let item = viewModel.output.items[index]
+                            ForEach(viewModel.binding.items.indices, id: \.self) { index in
+                                let item = viewModel.binding.items[index]
                                 NavigationLink(
                                     destination: WebContentView(url: item.url).navigationBarTitle(item.title, displayMode: .inline),
-                                    isActive: $viewModel.output.items[index].isNavigationPushing
+                                    isActive: viewModel.$binding.items[index].isNavigationPushing
                                 ) {
-                                    SmallCardView(item: $viewModel.output.items[index])
+                                    SmallCardView(item: viewModel.$binding.items[index])
                                 }
                             }
                         }
@@ -69,60 +69,26 @@ public struct SearchView<ViewModel: SearchViewModelProtocol>: View {
 
 struct SearchView_Previews: PreviewProvider {
 
-    @StateObject static var viewModel: ViewModelMock = .init()
-
     static var previews: some View {
-        SearchView(viewModel: viewModel.state(.initialzed))
-            .previewDisplayName(SearchViewModelState.initialzed.rawValue)
-        SearchView(viewModel: viewModel.state(.dataLoading))
-            .previewDisplayName(SearchViewModelState.dataLoading.rawValue)
-        SearchView(viewModel: viewModel.state(.dataFeched))
+        SearchView(viewModel: dataFetchedViewModel)
             .previewDisplayName(SearchViewModelState.dataFeched.rawValue)
-        SearchView(viewModel: viewModel.state(.error))
-            .previewDisplayName(SearchViewModelState.error.rawValue)
     }
 
-    final class ViewModelMock: SearchViewModelProtocol {
-        final class Input: SearchViewModelInput {
-            var onCommit: PassthroughSubject<Void, Never> = .init()
-        }
+    static var dataFetchedViewModel: SearchViewModel {
+        let binding = SearchViewModel.Binding()
+        let entity = CardViewEntity(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
+                                    title: "swift",
+                                    subTitle: "apple",
+                                    language: "Swift",
+                                    star: 1000,
+                                    description: "The Swift Programming Language",
+                                    url: .init(string: "https://github.com/apple/swift")!)
 
-        final class Binding: SearchViewModelBinding {
-            @State var keyword: String = ""
-        }
-
-        final class Output: SearchViewModelOutput {
-            var state: SearchViewModelState = .initialzed
-            var items: [CardViewEntity] = []
-            var isAlertShowing: Bool = false
-        }
-
-        let input: Input = .init()
-        var binding: Binding = .init()
-        var output: Output = .init()
-
-        func state(_ state: SearchViewModelState) -> Self {
-            output.state = state
-            switch state {
-            case .initialzed:
-                break
-            case .dataLoading:
-                break
-            case .dataFeched:
-                let entity = CardViewEntity(imageURL: .init(string: "https://avatars.githubusercontent.com/u/10639145?s=200&v=4")!,
-                                            title: "swift",
-                                            subTitle: "apple",
-                                            language: "Swift",
-                                            star: 1000,
-                                            description: "The Swift Programming Language",
-                                            url: .init(string: "https://github.com/apple/swift")!)
-
-                output.items = [CardViewEntity](repeating: entity, count: 3)
-            case .error:
-                output.isAlertShowing = true
-                break
-            }
-            return self
-        }
+        binding.items = [CardViewEntity](repeating: entity, count: 3)
+        let output = SearchViewModel.Output()
+        output.state = .dataFeched
+        return SearchViewModel(
+            binding: BindableObject<SearchViewModel.Binding>(binding),
+            output: output)
     }
 }
