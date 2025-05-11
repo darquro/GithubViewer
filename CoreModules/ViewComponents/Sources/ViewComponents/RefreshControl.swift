@@ -80,7 +80,7 @@ public extension View {
     }
 }
 
-final class ScrollViewMatcher: UIViewControllerRepresentable {
+struct ScrollViewMatcher: UIViewControllerRepresentable {
 
     let onMatch: (UIScrollView) -> Void
     @Binding var geometryReaderFrame: CGRect

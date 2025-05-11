@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -436,7 +436,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Configurations/GitHubViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P3T6JXLD8F;
+				DEVELOPMENT_TEAM = YZ2PUYUY97;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Configurations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -460,7 +460,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Configurations/GitHubViewer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P3T6JXLD8F;
+				DEVELOPMENT_TEAM = YZ2PUYUY97;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Configurations/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
