@@ -1,10 +1,3 @@
-//
-//  ViewModelObject.swift
-//  GitHubViewer
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/25.
-//
-
 import Foundation
 import SwiftUI
 import Combine

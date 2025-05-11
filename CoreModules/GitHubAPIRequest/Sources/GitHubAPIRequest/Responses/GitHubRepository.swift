@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/11/03.
-//
-
 import Foundation
 
 public struct GitHubRepository: Decodable {

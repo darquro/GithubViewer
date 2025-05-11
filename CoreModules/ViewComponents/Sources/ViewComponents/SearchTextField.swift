@@ -1,10 +1,3 @@
-//
-//  SearchTextField.swift
-//  GitHubViewer
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/31.
-//
-
 import UIKit
 import SwiftUI
 

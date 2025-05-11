@@ -1,10 +1,3 @@
-//
-//  GitHubViewerTests.swift
-//  GitHubViewerTests
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/30.
-//
-
 import XCTest
 
 class GitHubViewerTests: XCTestCase {

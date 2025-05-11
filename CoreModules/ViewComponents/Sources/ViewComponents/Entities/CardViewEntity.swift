@@ -1,10 +1,3 @@
-//
-//  CardViewEntity.swift
-//  GitHubViewer
-//
-//  Created by Kuroda, Yuki | Yuki | ECID on 2021/10/24.
-//
-
 import Foundation
 
 public struct CardViewEntity: Identifiable {
